@@ -1,5 +1,6 @@
-function App() {
+import { useState } from "react";
 
+function App() {
   const [learnerData, setLearnerData] = useState({
     learners: [
       {
@@ -65,9 +66,39 @@ function App() {
 
   return (
     <div className="App">
-      
+      {learnerData.learners.map((learner) => {
+        return (
+          <Learner 
+            learner={learner}
+          />
+        )
+      })}
     </div>
   );
+}
+
+function Learner({learner}) {
+  return (
+    <div className="learner">
+      <h1>{learner.name}</h1>
+      <h4>{learner.bio}</h4>
+      <ul>
+        {learner.scores.map((score) => {
+          return (
+            <Score 
+              score={score}
+            />
+          )
+        })}
+      </ul>
+    </div>
+  )
+}
+
+function Score({score}) {
+  return (
+    <li>Score of {score.score} on <time>{score.date}</time></li>
+  )
 }
 
 export default App;
